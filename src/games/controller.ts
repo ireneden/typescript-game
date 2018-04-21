@@ -1,5 +1,4 @@
 import { JsonController, Get, Param, Put, Body, BodyParam, NotFoundError, Post, HttpCode } from 'routing-controllers'
-import {getRepository} from "typeorm";
 import Game from './entity'
 
 
@@ -41,16 +40,6 @@ export default class GameController {
         return game.save()
     }
 
-    // @Post('/games')
-    // @HttpCode(201)
-    // async createGame(
-    // @Param('name') name: string,
-    // @Body() newGame: Partial<Game>
-    // ) {
-    // if (name) throw new BadRequestError('This game name already exists! Please choose another name')
-
-    // return Game.merge(newGame, name).save()
-    // }
 
     @Put('/games/:id')
     async updateGames(
