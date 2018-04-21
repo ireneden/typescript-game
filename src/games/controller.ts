@@ -1,6 +1,6 @@
+import { JsonController, Get, Param, Put, Body, BodyParam, NotFoundError, Post, HttpCode } from 'routing-controllers'
+import {getRepository} from "typeorm";
 import Game from './entity'
-import { JsonController, Get, Param, Put, Body, NotFoundError, Post, HttpCode } from 'routing-controllers'
-
 
 
 @JsonController()
@@ -22,8 +22,46 @@ export default class GameController {
     @Post('/games')
     @HttpCode(201)
     createGame(
-        @Body() game: Game
-    ) {
+        @BodyParam("name") name: string
+    ) 
+    {
+        const colors = ['red', 'blue', 'green', 'yellow', 'magenta']
+        let randomColor = colors[Math.floor(Math.random()* colors.length)];
+        const defaultBoard = [
+            ['o', 'o', 'o'],
+            ['o', 'o', 'o'],
+            ['o', 'o', 'o']
+        ] 
+
+        const game = new Game();
+        game.name = name;
+        game.color = randomColor;
+        game.board = defaultBoard;
+    
         return game.save()
     }
+
+    // @Post('/games')
+    // @HttpCode(201)
+    // async createGame(
+    // @Param('name') name: string,
+    // @Body() newGame: Partial<Game>
+    // ) {
+    // if (name) throw new BadRequestError('This game name already exists! Please choose another name')
+
+    // return Game.merge(newGame, name).save()
+    // }
+
+    @Put('/games/:id')
+    async updateGames(
+    @Param('id') id: number,
+    @Body() update: Partial<Game>
+    ) {
+    const game = await Game.findOne(id)
+    if (!game) throw new NotFoundError('Game not found!')
+
+    return Game.merge(game, update).save()
+    }
 }
+
+    
