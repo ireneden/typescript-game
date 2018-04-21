@@ -8,6 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const entity_1 = require("./entity");
 const routing_controllers_1 = require("routing-controllers");
@@ -16,6 +19,12 @@ let GameController = class GameController {
         const games = await entity_1.default.find();
         return { games };
     }
+    getGame(id) {
+        return entity_1.default.findOne(id);
+    }
+    createGame(game) {
+        return game.save();
+    }
 };
 __decorate([
     routing_controllers_1.Get('/games'),
@@ -23,6 +32,21 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], GameController.prototype, "allGames", null);
+__decorate([
+    routing_controllers_1.Get('/games/:id'),
+    __param(0, routing_controllers_1.Param('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], GameController.prototype, "getGame", null);
+__decorate([
+    routing_controllers_1.Post('/games'),
+    routing_controllers_1.HttpCode(201),
+    __param(0, routing_controllers_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [entity_1.default]),
+    __metadata("design:returntype", void 0)
+], GameController.prototype, "createGame", null);
 GameController = __decorate([
     routing_controllers_1.JsonController()
 ], GameController);
