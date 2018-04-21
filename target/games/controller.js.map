@@ -1,1 +1,1 @@
-{"version":3,"file":"controller.js","sourceRoot":"","sources":["../../src/games/controller.ts"],"names":[],"mappings":""}
+{"version":3,"file":"controller.js","sourceRoot":"","sources":["../../src/games/controller.ts"],"names":[],"mappings":";;;;;;;;;;;AAAA,qCAA2B;AAC3B,6DAAwD;AAKxD,IAAqB,cAAc,GAAnC;IAGI,KAAK,CAAC,QAAQ;QACd,MAAM,KAAK,GAAG,MAAM,gBAAI,CAAC,IAAI,EAAE,CAAA;QAC/B,OAAO,EAAE,KAAK,EAAE,CAAA;IAChB,CAAC;CACJ,CAAA;AAJG;IADC,yBAAG,CAAC,QAAQ,CAAC;;;;8CAIb;AANgB,cAAc;IADlC,oCAAc,EAAE;GACI,cAAc,CAOlC;kBAPoB,cAAc"}
