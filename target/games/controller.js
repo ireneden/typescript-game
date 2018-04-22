@@ -44,7 +44,7 @@ let GameController = class GameController {
             game.color = color;
             const errors = await class_validator_1.validate(game);
             if (errors.length > 0) {
-                throw new Error('Validation failed! Color is not a valid one');
+                throw new Error('Validation failed!');
             }
             else {
                 await game.save();
