@@ -13,6 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const routing_controllers_1 = require("routing-controllers");
+const class_validator_1 = require("class-validator");
 const entity_1 = require("./entity");
 let GameController = class GameController {
     async allGames() {
@@ -36,11 +37,20 @@ let GameController = class GameController {
         game.board = defaultBoard;
         return game.save();
     }
-    async updateGames(id, update) {
+    async updateGames(id, color, name) {
         const game = await entity_1.default.findOne(id);
-        if (!game)
-            throw new routing_controllers_1.NotFoundError('Game not found!');
-        return entity_1.default.merge(game, update).save();
+        if (game) {
+            game.name = name;
+            game.color = color;
+            const errors = await class_validator_1.validate(game);
+            if (errors.length > 0) {
+                throw new Error('Validation failed! Color is not a valid one');
+            }
+            else {
+                await game.save();
+            }
+        }
+        return game;
     }
 };
 __decorate([
@@ -67,9 +77,10 @@ __decorate([
 __decorate([
     routing_controllers_1.Put('/games/:id'),
     __param(0, routing_controllers_1.Param('id')),
-    __param(1, routing_controllers_1.Body()),
+    __param(1, routing_controllers_1.BodyParam("color")),
+    __param(2, routing_controllers_1.BodyParam("name")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:paramtypes", [Number, String, String]),
     __metadata("design:returntype", Promise)
 ], GameController.prototype, "updateGames", null);
 GameController = __decorate([
@@ -77,5 +88,3 @@ GameController = __decorate([
 ], GameController);
 exports.default = GameController;
 //# sourceMappingURL=controller.js.map
-
-
