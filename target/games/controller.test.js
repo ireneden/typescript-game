@@ -1,5 +1,3 @@
-const { colors, defaultBoard } = require('./controller');
-
 
 describe('arrayContaining', () => {
     const defaultBoard = [
@@ -8,7 +6,6 @@ describe('arrayContaining', () => {
         ['o', 'o', 'o']
     ];
     
-   
     it('matches if first array contains "o", "o", "o"', () => {
       expect(['o', 'o', 'o']).toEqual(expect.arrayContaining(defaultBoard[0]));
     });
@@ -23,7 +20,19 @@ describe('arrayContaining', () => {
 
 describe('arrayContaining', () => {
     const colors = ['red', 'blue', 'green', 'yellow', 'magenta'];
-    it('does not match if received does not contain expected elements', () => {
+    it('matches when containing accepted colors', () => {
         expect(['red', 'blue', 'green', 'yellow', 'magenta']).toEqual(expect.arrayContaining(colors),);
     });
 });
+
+
+describe('randomized color needs to be one of the accepted ones', () => {
+    const colors = ['red', 'blue', 'green', 'yellow', 'magenta']
+    let randomColor = colors[Math.floor(Math.random()* colors.length)];  
+    it('matches when color contains the letter "e", which is common for all accepted colors', () => {
+    expect(randomColor).toContain('e');
+    });
+})    
+
+
+
