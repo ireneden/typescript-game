@@ -2,7 +2,7 @@ This app is backend only and is made with TypeScript - TypeORM
 
 ## Quickstart:
 1. clone this repo
-2. cd into /server
+2. cd into /src
 3. run yarn install
 4. run tsc or tsc -w
 5. run node . or nodemon .
