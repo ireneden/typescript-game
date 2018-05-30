@@ -9,7 +9,7 @@ export default class GameController {
     @Get('/games')
     async allGames() {
     const games = await Game.find()
-    return { games }
+    return { games } //this is an envelope being shorthand for {games : games}
     }
 
     @Get('/games/:id')
